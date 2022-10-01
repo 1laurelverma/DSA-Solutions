@@ -1,0 +1,30 @@
+class Solution {
+public:
+    vector<vector<int>> generateMatrix(int n) {
+        //copied solution
+        vector<vector<int>> matrix(n,vector<int>(n,0));
+        int startCol=0,endCol=n-1,startRow=0,endRow=n-1,k=1;
+        while(startCol <= endCol && startRow <= endRow){
+            for(int r=startCol;r<=endCol;r++){
+                matrix[startRow][r]=k++;
+            }
+            for(int d=startRow+1;d<=endRow;d++){
+                if(matrix[d][endCol]>=1 && matrix[d][endCol]<=20)
+                    break;
+                matrix[d][endCol]=k++;
+            }
+            for(int l=endCol-1;l>=startCol;l--){
+                if(matrix[endRow][l]>=1 && matrix[endRow][l]<=20)
+                    break;
+                matrix[endRow][l]=k++;
+            }
+            for(int t=endRow-1;t>startRow;t--){
+                if(matrix[t][startCol]>=1 && matrix[t][startCol]<=20)
+                    break;
+                matrix[t][startCol]=k++;
+            }
+            startCol++;endCol--;startRow++;endRow--;
+        }
+        return matrix;
+    }
+};
